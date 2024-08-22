@@ -3,9 +3,9 @@ import java.util.Scanner;
 public class Hinlok {
 
 
-    public static void chat(){
+    public void chat(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Wassup, I am Hinlok and I love chinese songs. How can I help  you today.\nhi" +
+        System.out.println("Wassup, I am Hinlok and I love chinese songs. How can I help  you today.\n" +
                 "Type 'bye' to exit");
         while (true) {
             String reply = scanner.nextLine();
