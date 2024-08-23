@@ -1,31 +1,10 @@
-public class Todo {
-    protected boolean isDone;
-    protected String name;
-
+public class Todo extends Task{
     public Todo( String name){
-        this.name = name;
-        this.isDone = false;
+        super(name);
     }
 
-    public String getStatus(){
-        return (isDone ? "X" : "");
+    public String toString(){
+        return "[T]" + super.toString();
     }
-
-    public String showStatus(){
-       return "[" + getStatus() + "] " + getName();
-    }
-
-    public String getName(){
-        return this.name;
-    }
-
-    public void markAsDone(){
-        this.isDone = true;
-    }
-
-    public void markAsUndone(){
-        this.isDone = false;
-    }
-
-
 }
+
