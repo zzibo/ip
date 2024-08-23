@@ -1,19 +1,33 @@
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Hinlok {
-    private static ArrayList<String> todo = new ArrayList<>();
+    private static final ArrayList<Todo> todoList = new ArrayList<>();
 
-    private void addTodo(String todoItem){
-        todo.add(todoItem);
+    private void addTodo(Todo todoItem){
+        todoList.add(todoItem);
     }
 
     public void showTodo(){
-        for (int i = 0; i < todo.size(); i++){
-            System.out.println((i+1) + ". " + todo.get(i));
+        for (int i = 0; i < todoList.size(); i++){
+            System.out.println( (i+1) + "." + todoList.get(i).showStatus());
         }
     }
+
+    public void markTodo(int i){
+        Todo markedTodo = todoList.get(i);
+        markedTodo.markAsDone();
+        System.out.println("Roger sir, I marked this todo as done:");
+        System.out.println(markedTodo.showStatus());
+    }
+
+    public void unmarkTodo(int i){
+        Todo markedTodo = todoList.get(i);
+        markedTodo.markAsUndone();
+        System.out.println("Roger sir, I marked this todo as undone:");
+        System.out.println(markedTodo.showStatus());
+    }
+
 
 
     public void chat(){
@@ -28,9 +42,17 @@ public class Hinlok {
             }
             else if (reply.equalsIgnoreCase("list")){
                 showTodo();
-            }
-            else{
-                addTodo(reply);
+
+            } else if (reply.startsWith("mark")) {
+                int todoIndex = Integer.parseInt(reply.split(" ")[1]) - 1;
+                markTodo(todoIndex);
+                
+            } else if (reply.startsWith("unmark")) {
+                int todoIndex = Integer.parseInt(reply.split(" ")[1]) - 1;
+                unmarkTodo(todoIndex);
+
+            } else{
+                addTodo(new Todo(reply));
                 System.out.println("added:" + reply);
             }
         }
