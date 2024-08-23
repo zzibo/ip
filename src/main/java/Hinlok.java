@@ -9,7 +9,11 @@ public class Hinlok{
             throw new HinlokException("You did not give me a todo task bro");
         }
         taskList.add(new Todo(taskDetails));
-        System.out.println("Your task list has " + taskList.size() + " tasks currently!");
+        System.out.println(getNumberInList());
+    }
+
+    private String getNumberInList(){
+        return "The task list has " + Hinlok.taskList.size() + " task currently";
     }
 
     private void addDeadline(String taskDetails) throws HinlokException {
@@ -21,6 +25,7 @@ public class Hinlok{
             String date = deadlineDetails[1];
             taskList.add(new Deadline(deadlineName, date));
             System.out.println("Added a Deadline: " + deadlineName);
+            System.out.println(getNumberInList());
         }
 
     }
@@ -35,6 +40,7 @@ public class Hinlok{
             String to = eventDetails[2];
             taskList.add(new Event(eventName, from, to));
             System.out.println("Added a Event: " + eventName);
+            System.out.println(getNumberInList());
         }
     }
 
@@ -56,6 +62,13 @@ public class Hinlok{
         markedTask.markAsUndone();
         System.out.println("Roger sir, I marked this task as undone:");
         System.out.println(markedTask);
+    }
+
+    public void deleteTask(int i){
+        String temp = taskList.get(i).toString();
+        taskList.remove(i);
+        System.out.println("Roger sir, I removed " + temp );
+        System.out.println(getNumberInList());
     }
 
 
@@ -105,6 +118,11 @@ public class Hinlok{
                         case "event":
                             addEvent(taskDetails);
                             System.out.println("Added a Event item: " + taskDetails);
+                            break;
+
+                        case "delete":
+                            int taskIndexDelete = Integer.parseInt(reply.split(" ")[1]) - 1;
+                            deleteTask(taskIndexDelete);
                             break;
 
                         default:
