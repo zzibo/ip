@@ -19,14 +19,14 @@ public class Hinlok{
         Task markedTask = taskList.get(i);
         markedTask.markAsDone();
         System.out.println("Roger sir, I marked this todo as done:");
-        System.out.println(markedTask.toString());
+        System.out.println(markedTask);
     }
 
     public void unmarkTask(int i){
         Task markedTask = taskList.get(i);
         markedTask.markAsUndone();
         System.out.println("Roger sir, I marked this task as undone:");
-        System.out.println(markedTask.toString());
+        System.out.println(markedTask);
     }
 
 
