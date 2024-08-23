@@ -4,9 +4,38 @@ import java.util.ArrayList;
 public class Hinlok{
     private static final ArrayList<Task> taskList = new ArrayList<>();
 
-    private void addTask(Task taskItem){
-        taskList.add(taskItem);
+    private void addTodo(String taskDetails) throws HinlokException {
+        if (taskDetails.trim().isEmpty()){
+            throw new HinlokException("You did not give me a todo task bro");
+        }
+        taskList.add(new Todo(taskDetails));
         System.out.println("Your task list has " + taskList.size() + " tasks currently!");
+    }
+
+    private void addDeadline(String taskDetails) throws HinlokException {
+        if (!taskDetails.contains("/by")) {
+            throw new HinlokException("your Deadline format is wrong bro");
+        } else {
+            String[] deadlineDetails = taskDetails.split(" /by ", 2);
+            String deadlineName = deadlineDetails[0];
+            String date = deadlineDetails[1];
+            taskList.add(new Deadline(deadlineName, date));
+            System.out.println("Added a Deadline: " + deadlineName);
+        }
+
+    }
+
+    private void addEvent(String taskDetails) throws HinlokException{
+        if (!taskDetails.contains("/from") || !taskDetails.contains("/to")) {
+            throw new HinlokException("your Event format is wrong bro");
+        } else {
+            String[] eventDetails = taskDetails.split(" /from | /to ", 3);
+            String eventName = eventDetails[0];
+            String from = eventDetails[1];
+            String to = eventDetails[2];
+            taskList.add(new Event(eventName, from, to));
+            System.out.println("Added a Event: " + eventName);
+        }
     }
 
     public void showTask(){
@@ -46,56 +75,44 @@ public class Hinlok{
                 showTask();
             }
             else if (!reply.contains(" ")) {
-                System.out.println("What the sigma!");
+                System.out.println("What the sigma! I don't recognise this command");
             } else {
 
                 String command = reply.split(" ", 2)[0];
                 String taskDetails = reply.split(" ", 2)[1];
+                try {
+                    switch (command.toLowerCase()) {
+                        case "mark":
+                            int taskIndexMark = Integer.parseInt(reply.split(" ")[1]) - 1;
+                            markTask(taskIndexMark);
+                            break;
 
-                switch (command.toLowerCase()) {
-                    case "mark":
-                        int taskIndexMark = Integer.parseInt(reply.split(" ")[1]) - 1;
-                        markTask(taskIndexMark);
-                        break;
+                        case "unmark":
+                            int taskIndexUnmark = Integer.parseInt(reply.split(" ")[1]) - 1;
+                            unmarkTask(taskIndexUnmark);
+                            break;
 
-                    case "unmark":
-                        int taskIndexUnmark = Integer.parseInt(reply.split(" ")[1]) - 1;
-                        unmarkTask(taskIndexUnmark);
-                        break;
+                        case "todo":
+                            addTodo(taskDetails);
+                            System.out.println("Added a Todo item: " + taskDetails);
+                            break;
 
-                    case "todo":
-                        addTask(new Todo(taskDetails));
-                        System.out.println("Added a Todo item: " + taskDetails);
-                        break;
+                        case "deadline":
+                            addDeadline(taskDetails);
+                            System.out.println("Added a Deadline item: " + taskDetails);
+                            break;
 
-                    case "deadline":
-                        if (!taskDetails.contains("/by")){
-                            System.out.println("your format is wrong bro");
-                        } else {
-                            String[] deadlineDetails = taskDetails.split(" /by ", 2);
-                            String deadlineName = deadlineDetails[0];
-                            String date = deadlineDetails[1];
-                            addTask(new Deadline(deadlineName, date));
-                            System.out.println("Added a Deadline: " + deadlineName);
-                        }
-                        break;
+                        case "event":
+                            addEvent(taskDetails);
+                            System.out.println("Added a Event item: " + taskDetails);
+                            break;
 
-                    case "event":
-                        if (!taskDetails.contains("/from") || !taskDetails.contains("/to")){
-                            System.out.println("your format is wrong bro");
-                        } else {
-                            String[] eventDetails = taskDetails.split(" /from | /to ", 3);
-                            String eventName = eventDetails[0];
-                            String from = eventDetails[1];
-                            String to = eventDetails[2];
-                            addTask(new Event(eventName, from, to));
-                            System.out.println("Added a Event: " + eventName);
-                        }
-                        break;
-
-                    default:
-                        System.out.println("What the skibbidi are you talking about bro");
-                        break;
+                        default:
+                            System.out.println("What the skibbidi are you talking about bro");
+                            break;
+                    }
+                } catch (HinlokException e){
+                    System.out.println(e.getMessage());
                 }
             }
 
