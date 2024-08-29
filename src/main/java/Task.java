@@ -2,9 +2,10 @@ public class Task {
     protected boolean isDone;
     protected String name;
 
-    public Task( String name){
+    public Task( String name, boolean isDone){
         this.name = name;
-        this.isDone = false;
+        this.isDone = isDone;
+
     }
 
     public String getStatus(){
