@@ -1,4 +1,4 @@
-import Exceptions.HinlokException;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -9,10 +9,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TaskFile {
-    private String savedPath;
+    private final String savedPath;
     public TaskFile(String savedPath){
         this.savedPath = savedPath;
-    };
+    }
 
     public ArrayList<Task> loadTaskFromFile(){
         try {
@@ -20,15 +20,11 @@ public class TaskFile {
             if (!file.exists()) {
                 boolean isDirCreated = file.getParentFile().mkdirs();
                 boolean isFileCreated = file.createNewFile();
-                if (isFileCreated){
+                if (isFileCreated) {
                     System.out.println("file created");
-                }else{
-                    System.out.println("smth is wrong");
                 }
                 if(isDirCreated) {
                     System.out.println("Dir created");
-                }else {
-                    System.out.println("smth is wrong");
                 }
             }
             BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -45,11 +41,11 @@ public class TaskFile {
         return null;
     }
 
-    public Task readTask(String task) throws HinlokException {
+    public Task readTask(String task) {
         String regex = "\\[(T|D|E)\\]\\[( |X)\\]\\s*(.*?)\\s*(\\(.*?\\))?";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(task);
-        if (matcher.matches()) {;
+        if (matcher.matches()) {
             String type = matcher.group(1);
             String status = matcher.group(2);
             String name = matcher.group(3);
