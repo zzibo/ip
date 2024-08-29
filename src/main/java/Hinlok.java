@@ -1,19 +1,26 @@
-import java.util.Scanner;
+import Exceptions.HinlokException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Hinlok{
-    private static final ArrayList<Task> taskList = new ArrayList<>();
+    private static ArrayList<Task> taskList;
+    private static final String SAVED_PATH = "./data/hinlok.txt";
+    private static TaskFile taskFile;
 
-    private void addTodo(String taskDetails) throws HinlokException {
-        if (taskDetails.trim().isEmpty()){
-            throw new HinlokException("You did not give me a todo task bro");
-        }
-        taskList.add(new Todo(taskDetails));
-        System.out.println(getNumberInList());
+    public Hinlok(){
+        taskFile = new TaskFile(SAVED_PATH);
+        taskList = taskFile.loadTaskFromFile();
     }
 
     private String getNumberInList(){
         return "The task list has " + Hinlok.taskList.size() + " task currently";
+    }
+    private void addTodo(String taskDetails) throws HinlokException {
+        if (taskDetails.trim().isEmpty()){
+            throw new HinlokException("You did not give me a todo task bro");
+        }
+        taskList.add(new Todo(taskDetails, false));
+        System.out.println(getNumberInList());
     }
 
     private void addDeadline(String taskDetails) throws HinlokException {
@@ -23,7 +30,7 @@ public class Hinlok{
             String[] deadlineDetails = taskDetails.split(" /by ", 2);
             String deadlineName = deadlineDetails[0];
             String date = deadlineDetails[1];
-            taskList.add(new Deadline(deadlineName, date));
+            taskList.add(new Deadline(deadlineName, date, false));
             System.out.println("Added a Deadline: " + deadlineName);
             System.out.println(getNumberInList());
         }
@@ -38,42 +45,41 @@ public class Hinlok{
             String eventName = eventDetails[0];
             String from = eventDetails[1];
             String to = eventDetails[2];
-            taskList.add(new Event(eventName, from, to));
+            taskList.add(new Event(eventName, from, to, false));
             System.out.println("Added a Event: " + eventName);
             System.out.println(getNumberInList());
         }
     }
 
-    public void showTask(){
+    private void showTask(){
         for (int i = 0; i < taskList.size(); i++){
             System.out.println( (i+1) + "." + taskList.get(i).toString());
         }
     }
 
-    public void markTask(int i){
+    private void markTask(int i){
         Task markedTask = taskList.get(i);
         markedTask.markAsDone();
         System.out.println("Roger sir, I marked this todo as done:");
         System.out.println(markedTask);
     }
 
-    public void unmarkTask(int i){
+    private void unmarkTask(int i){
         Task markedTask = taskList.get(i);
         markedTask.markAsUndone();
         System.out.println("Roger sir, I marked this task as undone:");
         System.out.println(markedTask);
     }
 
-    public void deleteTask(int i){
+    private void deleteTask(int i){
         String temp = taskList.get(i).toString();
         taskList.remove(i);
         System.out.println("Roger sir, I removed " + temp );
         System.out.println(getNumberInList());
     }
 
+    private void chat() {
 
-
-    public void chat(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Wassup, I am Hinlok and I love chinese songs. How can I help you today.\n" +
                 "Type 'bye' to exit");
@@ -81,6 +87,7 @@ public class Hinlok{
             String reply = scanner.nextLine();
 
             if (reply.equalsIgnoreCase("bye")){
+                taskFile.saveTasks(taskList);
                 System.out.println("see ya");
                 break;
             }
