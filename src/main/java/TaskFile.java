@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -41,7 +43,7 @@ public class TaskFile {
         return null;
     }
 
-    public Task readTask(String task) {
+    public Task readTask(String task) throws Exception {
         String regex = "\\[(T|D|E)\\]\\[( |X)\\]\\s*(.*?)\\s*(\\(.*?\\))?";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(task);
@@ -61,10 +63,11 @@ public class TaskFile {
                     Matcher matcherD = patternD.matcher(extra);
 
                     if (matcherD.find()) {
-                        String deadline = matcherD.group(1);
+                        String by = matcherD.group(1);
+                        LocalDate deadline = LocalDate.parse(by, DateTimeFormatter.ofPattern("MMM dd yyyy"));
                         System.out.println(task + " added");
                         return new Deadline(name, deadline, status.equals("X"));
-                    }else{
+                    } else {
                         System.out.println(task + " does not follow the format");
                     }
                     break;
@@ -78,7 +81,7 @@ public class TaskFile {
                         String to = matcherE.group(2);
                         System.out.println(task + " added");
                         return new Event(name, from, to, status.equals("X"));
-                    }else{
+                    } else {
                         System.out.println(task + " does not follow the format");
                     }
                     break;
@@ -86,6 +89,8 @@ public class TaskFile {
                     System.out.println(task + " does not follow format");
                     break;
             }
+        }else{
+            throw new Exception("Your task description is in the wrong format");
         }
         return null;
     }

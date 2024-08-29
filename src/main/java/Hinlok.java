@@ -1,6 +1,7 @@
 import Exceptions.HinlokException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class Hinlok{
     private static ArrayList<Task> taskList;
@@ -26,20 +27,24 @@ public class Hinlok{
     private void addDeadline(String taskDetails) throws HinlokException {
         if (!taskDetails.contains("/by")) {
             throw new HinlokException("your Deadline format is wrong bro");
+        } else if (taskDetails.trim().isEmpty()) {
+            throw new HinlokException("you did not give me a deadline task bro");
         } else {
-            String[] deadlineDetails = taskDetails.split(" /by ", 2);
-            String deadlineName = deadlineDetails[0];
-            String date = deadlineDetails[1];
-            taskList.add(new Deadline(deadlineName, date, false));
-            System.out.println("Added a Deadline: " + deadlineName);
-            System.out.println(getNumberInList());
-        }
+                String[] deadlineDetails = taskDetails.split(" /by ", 2);
+                String deadlineName = deadlineDetails[0];
+                LocalDate date = LocalDate.parse(deadlineDetails[1]);
+                taskList.add(new Deadline(deadlineName, date, false));
+                System.out.println("Added a Deadline: " + deadlineName);
+                System.out.println(getNumberInList());
+            }
 
-    }
+        }
 
     private void addEvent(String taskDetails) throws HinlokException{
         if (!taskDetails.contains("/from") || !taskDetails.contains("/to")) {
             throw new HinlokException("your Event format is wrong bro");
+        } else if (taskDetails.trim().isEmpty()) {
+            throw new HinlokException("you did not give me a event task bro");
         } else {
             String[] eventDetails = taskDetails.split(" /from | /to ", 3);
             String eventName = eventDetails[0];
