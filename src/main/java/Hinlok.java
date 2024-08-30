@@ -1,7 +1,15 @@
-import Exceptions.HinlokException;
+import exceptions.HinlokException;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import file.TaskFile;
+import tasks.Todo;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 public class Hinlok{
     private static ArrayList<Task> taskList;
@@ -25,33 +33,35 @@ public class Hinlok{
     }
 
     private void addDeadline(String taskDetails) throws HinlokException {
-        if (!taskDetails.contains("/by")) {
-            throw new HinlokException("your Deadline format is wrong bro");
-        } else if (taskDetails.trim().isEmpty()) {
-            throw new HinlokException("you did not give me a deadline task bro");
+        String regex = "^(.*?) /by (\\d{4})-(\\d{2})-(\\d{2})$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(taskDetails);
+        if (!matcher.matches()) {
+            throw new HinlokException("your Tasks.Deadline format is wrong bro");
         } else {
                 String[] deadlineDetails = taskDetails.split(" /by ", 2);
                 String deadlineName = deadlineDetails[0];
                 LocalDate date = LocalDate.parse(deadlineDetails[1]);
                 taskList.add(new Deadline(deadlineName, date, false));
-                System.out.println("Added a Deadline: " + deadlineName);
+                System.out.println("Added a Tasks.Deadline: " + deadlineName);
                 System.out.println(getNumberInList());
             }
 
         }
 
     private void addEvent(String taskDetails) throws HinlokException{
-        if (!taskDetails.contains("/from") || !taskDetails.contains("/to")) {
-            throw new HinlokException("your Event format is wrong bro");
-        } else if (taskDetails.trim().isEmpty()) {
-            throw new HinlokException("you did not give me a event task bro");
+        String regex = "^(.*?)/from (.*?) /to (.*?)$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(taskDetails);
+        if (!matcher.matches()){
+            throw new HinlokException("your Tasks.Event format is wrong bro");
         } else {
             String[] eventDetails = taskDetails.split(" /from | /to ", 3);
             String eventName = eventDetails[0];
             String from = eventDetails[1];
             String to = eventDetails[2];
             taskList.add(new Event(eventName, from, to, false));
-            System.out.println("Added a Event: " + eventName);
+            System.out.println("Added a Tasks.Event: " + eventName);
             System.out.println(getNumberInList());
         }
     }
@@ -81,6 +91,20 @@ public class Hinlok{
         taskList.remove(i);
         System.out.println("Roger sir, I removed " + temp );
         System.out.println(getNumberInList());
+    }
+
+    public void findDeadlineByDate( String date ){
+        System.out.println("These are the deadline due on that day:\n");
+        for (Task task : taskList){
+            if (task instanceof Deadline){
+                System.out.println(((Deadline) task).getBy());
+                if(date.equals(((Deadline) task).getBy())){
+                    System.out.println(task);
+
+                }
+            }
+
+        }
     }
 
     private void chat() {
@@ -119,22 +143,23 @@ public class Hinlok{
 
                         case "todo":
                             addTodo(taskDetails);
-                            System.out.println("Added a Todo item: " + taskDetails);
                             break;
 
                         case "deadline":
                             addDeadline(taskDetails);
-                            System.out.println("Added a Deadline item: " + taskDetails);
                             break;
 
                         case "event":
                             addEvent(taskDetails);
-                            System.out.println("Added a Event item: " + taskDetails);
                             break;
 
                         case "delete":
                             int taskIndexDelete = Integer.parseInt(reply.split(" ")[1]) - 1;
                             deleteTask(taskIndexDelete);
+                            break;
+
+                        case "find":
+                            findDeadlineByDate(taskDetails);
                             break;
 
                         default:
