@@ -2,11 +2,11 @@ Wassup, I am Hinlok and I love chinese songs. How can I help you today.
 Type 'bye' to exit
 What the sigma!
 Your task list has 1 tasks currently!
-Added a Todo item: cook
+Added a tasks.Todo item: cook
 Your task list has 2 tasks currently!
-Added a Deadline: assignment
+Added a tasks.Deadline: assignment
 Your task list has 3 tasks currently!
-Added a Event: birthday
+Added a tasks.Event: birthday
 1.[T][ ] cook
 2.[D][ ] assignment (by: 5pm)
 3.[E][ ] birthday (from: 6pm to: 9pm)
