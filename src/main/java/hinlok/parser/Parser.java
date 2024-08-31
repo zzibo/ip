@@ -49,6 +49,7 @@ public class Parser {
 
                 default:
                     System.out.println("What the skibbidi are you talking about bro");
+                    break;
             }
             return null;
         }
