@@ -1,15 +1,9 @@
 import command.Command;
 import exceptions.HinlokException;
 import parser.Parser;
-import tasks.*;
+import tasks.TaskList;
 import file.TaskFile;
 import ui.Ui;
-
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.time.LocalDate;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
 
 public class Hinlok {
     private Ui ui;
@@ -33,7 +27,7 @@ public class Hinlok {
                 Command c = Parser.parse(fullCommand);
                 c.execute(taskList, ui, taskFile);
                 isExit = c.isExit();
-            } catch (HinlokException e) {
+            } catch (Exception e) {
                 ui.showError(e.getMessage());
             } finally {
                 ui.showLine();

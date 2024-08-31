@@ -6,6 +6,7 @@ import ui.Ui;
 
 public class ExitCommand extends Command {
 
+    @Override
     public void execute(TaskList taskList, Ui ui, TaskFile taskFile) {
         taskFile.saveTasks(taskList);
         System.out.println("see ya");

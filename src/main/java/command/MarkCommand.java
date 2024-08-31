@@ -9,6 +9,8 @@ public class MarkCommand extends Command{
     public MarkCommand(int idx){
         this.idx = idx;
     }
+
+    @Override
     public void execute(TaskList taskList, Ui ui, TaskFile taskFile) {
         taskList.markTask(idx);
     }
