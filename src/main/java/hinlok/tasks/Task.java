@@ -1,4 +1,4 @@
-package tasks;
+package hinlok.tasks;
 
 public class Task {
     protected boolean isDone;

@@ -1,12 +1,12 @@
-Wassup, I am Hinlok and I love chinese songs. How can I help you today.
+Wassup, I am hinlok.Hinlok and I love chinese songs. How can I help you today.
 Type 'bye' to exit
 What the sigma!
-Your task list has 1 tasks currently!
-Added a tasks.Todo item: cook
-Your task list has 2 tasks currently!
-Added a tasks.Deadline: assignment
-Your task list has 3 tasks currently!
-Added a tasks.Event: birthday
+Your task list has 1 hinlok.tasks currently!
+Added a hinlok.tasks.Todo item: cook
+Your task list has 2 hinlok.tasks currently!
+Added a hinlok.tasks.Deadline: assignment
+Your task list has 3 hinlok.tasks currently!
+Added a hinlok.tasks.Event: birthday
 1.[T][ ] cook
 2.[D][ ] assignment (by: 5pm)
 3.[E][ ] birthday (from: 6pm to: 9pm)

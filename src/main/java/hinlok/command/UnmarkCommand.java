@@ -1,8 +1,8 @@
-package command;
+package hinlok.command;
 
-import file.TaskFile;
-import tasks.TaskList;
-import ui.Ui;
+import hinlok.file.TaskFile;
+import hinlok.tasks.TaskList;
+import hinlok.ui.Ui;
 
 
 public class UnmarkCommand extends Command {

@@ -1,6 +1,6 @@
-package ui;
+package hinlok.ui;
 
-import tasks.TaskList;
+import hinlok.tasks.TaskList;
 
 import java.util.Scanner;
 

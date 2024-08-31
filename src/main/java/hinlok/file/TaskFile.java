@@ -1,6 +1,6 @@
-package file;
+package hinlok.file;
 
-import tasks.*;
+import hinlok.tasks.*;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -26,7 +26,7 @@ public class TaskFile {
                 boolean isDirCreated = file.getParentFile().mkdirs();
                 boolean isFileCreated = file.createNewFile();
                 if (isFileCreated) {
-                    System.out.println("file created");
+                    System.out.println("hinlok.file created");
                 }
                 if(isDirCreated) {
                     System.out.println("Dir created");
@@ -41,7 +41,7 @@ public class TaskFile {
             reader.close();
             return loadedList;
         } catch (Exception e) {
-            System.out.println("An error occurred while loading tasks: " + e.getMessage());
+            System.out.println("An error occurred while loading hinlok.tasks: " + e.getMessage());
         }
         return null;
     }
@@ -107,7 +107,7 @@ public class TaskFile {
             }
             writer.close();
         } catch (IOException e) {
-            System.out.println("An error occurred while saving tasks: " + e.getMessage());
+            System.out.println("An error occurred while saving hinlok.tasks: " + e.getMessage());
         }
     }
 }

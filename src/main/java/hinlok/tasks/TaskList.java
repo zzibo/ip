@@ -1,6 +1,6 @@
-package tasks;
+package hinlok.tasks;
 
-import exceptions.HinlokException;
+import hinlok.exceptions.HinlokException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

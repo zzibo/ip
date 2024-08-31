@@ -1,11 +1,10 @@
-package command;
+package hinlok.command;
 
-import exceptions.HinlokException;
-import file.TaskFile;
-import parser.Parser.CommandType;
-import tasks.Deadline;
-import tasks.TaskList;
-import ui.Ui;
+import hinlok.exceptions.HinlokException;
+import hinlok.file.TaskFile;
+import hinlok.parser.Parser.CommandType;
+import hinlok.tasks.TaskList;
+import hinlok.ui.Ui;
 
 public class AddCommand extends Command {
     private final String taskDetails;

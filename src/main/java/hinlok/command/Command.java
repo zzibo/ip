@@ -1,9 +1,9 @@
-package command;
+package hinlok.command;
 
-import exceptions.HinlokException;
-import file.TaskFile;
-import tasks.TaskList;
-import ui.Ui;
+import hinlok.exceptions.HinlokException;
+import hinlok.file.TaskFile;
+import hinlok.tasks.TaskList;
+import hinlok.ui.Ui;
 
 public abstract class Command {
 

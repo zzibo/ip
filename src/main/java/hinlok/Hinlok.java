@@ -1,9 +1,10 @@
-import command.Command;
-import exceptions.HinlokException;
-import parser.Parser;
-import tasks.TaskList;
-import file.TaskFile;
-import ui.Ui;
+package hinlok;
+
+import hinlok.command.Command;
+import hinlok.parser.Parser;
+import hinlok.tasks.TaskList;
+import hinlok.file.TaskFile;
+import hinlok.ui.Ui;
 
 public class Hinlok {
     private Ui ui;

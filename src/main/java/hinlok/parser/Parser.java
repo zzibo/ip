@@ -1,7 +1,7 @@
-package parser;
+package hinlok.parser;
 
-import command.*;
-import exceptions.HinlokException;
+import hinlok.command.*;
+import hinlok.exceptions.HinlokException;
 
 public class Parser {
     public enum CommandType {
