@@ -1,9 +1,7 @@
 package file;
 
-import tasks.Task;
-import tasks.Todo;
-import tasks.Deadline;
-import tasks.Event;
+import tasks.*;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -100,11 +98,11 @@ public class TaskFile {
         return null;
     }
 
-    public void saveTasks( ArrayList<Task> taskList){
+    public void saveTasks( TaskList taskList){
         try {
             File file = new File(savedPath);
             FileWriter writer = new FileWriter(file);
-            for (Task task : taskList) {
+            for (Task task : taskList.getAllTasks()) {
                 writer.write(task.toString() + "\n");
             }
             writer.close();
