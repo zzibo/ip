@@ -48,8 +48,8 @@ public class Parser {
                     int taskIndexDelete = Integer.parseInt(taskDetails) - 1;
                     return new DeleteCommand(taskIndexDelete);
 
-//                case "find":
-//                    return new FindCommand(taskDetails, CommandType.FIND);
+                case "find":
+                    return new FindCommand(taskDetails, CommandType.FIND);
 
                 default:
                     System.out.println("What the skibbidi are you talking about bro");

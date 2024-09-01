@@ -19,27 +19,20 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, TaskFile storage) {
-        ArrayList<Task> matchingTasks = new ArrayList<>();
-
-        for (Task task : taskList) {
-            if (task.getName().contains(taskDetails)) {
-                matchingTasks.add(task);
-            }
-        }
-
-        if (matchingTasks.isEmpty()) {
-            ui.showMessage("No matching tasks found.");
-        } else {
-            ui.showMessage("Here are the matching tasks in your list:");
-            for (int i = 0; i < matchingTasks.size(); i++) {
-                ui.showMessage((i + 1) + "." + matchingTasks.get(i).toString());
-            }
+    public void execute(TaskList taskList, Ui ui, TaskFile taskFile) throws HinlokException {
+        switch (type) {
+        case TODO:
+            taskList.addTodo(taskDetails);
+            break;
+        case DEADLINE:
+            taskList.addDeadline(taskDetails);
+            break;
+        case EVENT:
+            taskList.addEvent(taskDetails);
+            break;
+        default:
+            throw new HinlokException("unknown task type");
         }
     }
 
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }
