@@ -10,7 +10,7 @@ public class AddCommand extends Command {
     private final String taskDetails;
     private final CommandType type;
 
-    public AddCommand(String taskDetails, CommandType type){
+    public AddCommand(String taskDetails, CommandType type) {
         this.taskDetails = taskDetails;
         this.type = type;
     }
@@ -18,17 +18,17 @@ public class AddCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, TaskFile taskFile) throws HinlokException {
         switch (type) {
-            case TODO:
-                taskList.addTodo(taskDetails);
-                break;
-            case DEADLINE:
-                taskList.addDeadline(taskDetails);
-                break;
-            case EVENT:
-                taskList.addEvent(taskDetails);
-                break;
-            default:
-                throw new HinlokException("unknown task type");
+        case TODO:
+            taskList.addTodo(taskDetails);
+            break;
+        case DEADLINE:
+            taskList.addDeadline(taskDetails);
+            break;
+        case EVENT:
+            taskList.addEvent(taskDetails);
+            break;
+        default:
+            throw new HinlokException("unknown task type");
         }
     }
 }

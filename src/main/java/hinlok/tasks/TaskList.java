@@ -14,16 +14,16 @@ public class TaskList {
         this.taskList = taskList;
     }
 
-    public ArrayList<Task> getAllTasks(){
+    public ArrayList<Task> getAllTasks() {
         return this.taskList;
     }
 
 
-    public int getSize(){
+    public int getSize() {
         return taskList.size();
     }
 
-    public Task getTaskByIndex(int idx){
+    public Task getTaskByIndex(int idx) {
         return taskList.get(idx);
     }
 
@@ -72,7 +72,6 @@ public class TaskList {
             System.out.println(getNumberInList());
         }
     }
-
 
 
     public void markTask(int i) {

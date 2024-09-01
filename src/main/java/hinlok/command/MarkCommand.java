@@ -4,9 +4,10 @@ import hinlok.file.TaskFile;
 import hinlok.tasks.TaskList;
 import hinlok.ui.Ui;
 
-public class MarkCommand extends Command{
+public class MarkCommand extends Command {
     private int idx;
-    public MarkCommand(int idx){
+
+    public MarkCommand(int idx) {
         this.idx = idx;
     }
 

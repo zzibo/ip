@@ -7,6 +7,7 @@ import hinlok.ui.Ui;
 
 public class DeleteCommand extends Command {
     private int idx;
+
     public DeleteCommand(int taskIndexDelete) {
         this.idx = idx;
 

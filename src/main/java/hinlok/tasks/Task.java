@@ -4,29 +4,29 @@ public class Task {
     protected boolean isDone;
     protected String name;
 
-    public Task( String name, boolean isDone){
+    public Task(String name, boolean isDone) {
         this.name = name;
         this.isDone = isDone;
 
     }
 
-    public String getStatus(){
+    public String getStatus() {
         return (isDone ? "X" : " ");
     }
 
-    public String toString(){
-       return "[" + getStatus() + "] " + getName();
+    public String toString() {
+        return "[" + getStatus() + "] " + getName();
     }
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 
-    public void markAsDone(){
+    public void markAsDone() {
         this.isDone = true;
     }
 
-    public void markAsUndone(){
+    public void markAsUndone() {
         this.isDone = false;
     }
 

@@ -15,11 +15,12 @@ import java.util.regex.Pattern;
 
 public class TaskFile {
     private final String savedPath;
-    public TaskFile(String savedPath){
+
+    public TaskFile(String savedPath) {
         this.savedPath = savedPath;
     }
 
-    public ArrayList<Task> loadTaskFromFile(){
+    public ArrayList<Task> loadTaskFromFile() {
         try {
             File file = new File(savedPath);
             if (!file.exists()) {
@@ -28,7 +29,7 @@ public class TaskFile {
                 if (isFileCreated) {
                     System.out.println("hinlok.file created");
                 }
-                if(isDirCreated) {
+                if (isDirCreated) {
                     System.out.println("Dir created");
                 }
             }
@@ -56,49 +57,49 @@ public class TaskFile {
             String name = matcher.group(3);
             String extra = matcher.group(4);
             switch (type) {
-                case "T":
+            case "T":
+                System.out.println(task + " added");
+                return new Todo(name, status.equals("X"));
+
+            case "D":
+                String regexD = "\\(by: (.*?)\\)";
+                Pattern patternD = Pattern.compile(regexD);
+                Matcher matcherD = patternD.matcher(extra);
+
+                if (matcherD.find()) {
+                    String by = matcherD.group(1);
+                    LocalDate deadline = LocalDate.parse(by, DateTimeFormatter.ofPattern("MMM dd yyyy"));
                     System.out.println(task + " added");
-                    return new Todo(name, status.equals("X"));
+                    return new Deadline(name, deadline, status.equals("X"));
+                } else {
+                    System.out.println(task + " does not follow the format");
+                }
+                break;
+            case "E":
+                String regexE = "\\(from: (.*?) to: (.*?)\\)";
+                Pattern patternE = Pattern.compile(regexE);
+                Matcher matcherE = patternE.matcher(extra);
 
-                case "D":
-                    String regexD = "\\(by: (.*?)\\)";
-                    Pattern patternD = Pattern.compile(regexD);
-                    Matcher matcherD = patternD.matcher(extra);
-
-                    if (matcherD.find()) {
-                        String by = matcherD.group(1);
-                        LocalDate deadline = LocalDate.parse(by, DateTimeFormatter.ofPattern("MMM dd yyyy"));
-                        System.out.println(task + " added");
-                        return new Deadline(name, deadline, status.equals("X"));
-                    } else {
-                        System.out.println(task + " does not follow the format");
-                    }
-                    break;
-                case "E":
-                    String regexE = "\\(from: (.*?) to: (.*?)\\)";
-                    Pattern patternE = Pattern.compile(regexE);
-                    Matcher matcherE = patternE.matcher(extra);
-
-                    if (matcherE.find()) {
-                        String from = matcherE.group(1);
-                        String to = matcherE.group(2);
-                        System.out.println(task + " added");
-                        return new Event(name, from, to, status.equals("X"));
-                    } else {
-                        System.out.println(task + " does not follow the format");
-                    }
-                    break;
-                default:
-                    System.out.println(task + " does not follow format");
-                    break;
+                if (matcherE.find()) {
+                    String from = matcherE.group(1);
+                    String to = matcherE.group(2);
+                    System.out.println(task + " added");
+                    return new Event(name, from, to, status.equals("X"));
+                } else {
+                    System.out.println(task + " does not follow the format");
+                }
+                break;
+            default:
+                System.out.println(task + " does not follow format");
+                break;
             }
-        }else{
+        } else {
             throw new Exception("Your task description is in the wrong format");
         }
         return null;
     }
 
-    public void saveTasks( TaskList taskList){
+    public void saveTasks(TaskList taskList) {
         try {
             File file = new File(savedPath);
             FileWriter writer = new FileWriter(file);
