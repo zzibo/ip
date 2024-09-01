@@ -70,11 +70,5 @@ public class Parser {
         }
     }
 
-    public enum CommandType {
-        TODO,
-        DEADLINE,
-        EVENT
-    }
-
 }
 
