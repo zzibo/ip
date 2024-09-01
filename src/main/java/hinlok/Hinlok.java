@@ -17,6 +17,10 @@ public class Hinlok {
         taskList = new TaskList(taskFile.loadTaskFromFile());
     }
 
+    public static void main(String[] args) {
+        Hinlok hinlok = new Hinlok("./data/hinlok.txt");
+        hinlok.chat();
+    }
 
     private void chat() {
         ui.showWelcome();
@@ -34,9 +38,5 @@ public class Hinlok {
                 ui.showLine();
             }
         }
-    }
-    public static void main(String[] args) {
-        Hinlok hinlok = new Hinlok("./data/hinlok.txt");
-        hinlok.chat();
     }
 }

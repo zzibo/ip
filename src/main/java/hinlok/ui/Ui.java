@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Ui {
     private Scanner scanner;
 
-    public Ui(){
+    public Ui() {
         scanner = new Scanner(System.in);
 
     }
@@ -31,7 +31,7 @@ public class Ui {
         }
     }
 
-    public void showError(String errorMessage){
+    public void showError(String errorMessage) {
         System.out.println(errorMessage);
     }
 

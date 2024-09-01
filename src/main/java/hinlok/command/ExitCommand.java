@@ -13,7 +13,7 @@ public class ExitCommand extends Command {
         isExit();
     }
 
-    public boolean isExit(){
+    public boolean isExit() {
         return true;
     }
 }
