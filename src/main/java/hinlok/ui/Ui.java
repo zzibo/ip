@@ -51,4 +51,7 @@ public class Ui {
         System.out.println(errorMessage);
     }
 
+    public void showMessage(String s) {
+        System.out.println(s);
+    }
 }

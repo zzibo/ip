@@ -13,7 +13,8 @@ public class Parser {
     public enum CommandType {
         TODO,
         DEADLINE,
-        EVENT
+        EVENT,
+        FIND
     }
 
     /**
@@ -62,11 +63,14 @@ public class Parser {
                 int taskIndexDelete = Integer.parseInt(taskDetails) - 1;
                 return new DeleteCommand(taskIndexDelete);
 
-            default:
-                System.out.println("What the skibbidi are you talking about bro");
-                break;
-            }
-            return null;
+                case "find":
+                    return new FindCommand(taskDetails, CommandType.FIND);
+
+                default:
+                    System.out.println("What the skibbidi are you talking about bro");
+                    break;
+        }
+        return null;
         }
     }
 
