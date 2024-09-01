@@ -21,16 +21,31 @@ public class Ui {
                 "Type 'bye' to exit");
     }
 
+    /**
+     * Prints a row of lines to.
+     * section the chat into input and output.
+     *
+     */
     public void showLine() {
         System.out.println("____________________________");
     }
 
+    /**
+     * Prints out all the tasks stored.
+     *
+     * @param taskList
+     */
     public void showTasks(TaskList taskList) {
         for (int i = 0; i < taskList.getSize(); i++) {
             System.out.println((i + 1) + "." + taskList.getTaskByIndex(i).toString());
         }
     }
 
+    /**
+     * Prints out error message.
+     *
+     * @param errorMessage
+     */
     public void showError(String errorMessage){
         System.out.println(errorMessage);
     }

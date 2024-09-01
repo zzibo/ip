@@ -10,6 +10,15 @@ public class Parser {
         EVENT
     }
 
+    /**
+     * Returns a specific Command Object
+     * based on the command given
+     * If command is unknown, null is returned
+     *
+     * @param fullCommand Command given to Hinlok
+     * @return Command
+     * @throws HinlokException
+     */
     public static Command parse(String fullCommand) throws HinlokException {
         String[] splitCommand = fullCommand.trim().split(" ", 2);
 
