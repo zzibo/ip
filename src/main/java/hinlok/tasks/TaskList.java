@@ -31,6 +31,12 @@ public class TaskList {
         return "The task list has " + taskList.size() + " task currently";
     }
 
+    /**
+     * Adds a new Todo object into the task list.
+     *
+     * @param taskDetails
+     * @throws HinlokException
+     */
     public void addTodo(String taskDetails) throws HinlokException {
         if (taskDetails.trim().isEmpty()) {
             throw new HinlokException("You did not give me a todo task bro");
@@ -39,6 +45,11 @@ public class TaskList {
         System.out.println(getNumberInList());
     }
 
+    /**
+     * Adds a new deadline object into task list.
+     * @param taskDetails
+     * @throws HinlokException
+     */
     public void addDeadline(String taskDetails) throws HinlokException {
         String regex = "^(.*?) /by (\\d{4})-(\\d{2})-(\\d{2})$";
         Pattern pattern = Pattern.compile(regex);
@@ -56,6 +67,12 @@ public class TaskList {
 
     }
 
+    /**
+     * Adds an Event object to task list.
+     *
+     * @param taskDetails
+     * @throws HinlokException
+     */
     public void addEvent(String taskDetails) throws HinlokException {
         String regex = "^(.*?)/from (.*?) /to (.*?)$";
         Pattern pattern = Pattern.compile(regex);

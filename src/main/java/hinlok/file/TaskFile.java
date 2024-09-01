@@ -15,12 +15,15 @@ import java.util.regex.Pattern;
 
 public class TaskFile {
     private final String savedPath;
-
     public TaskFile(String savedPath) {
         this.savedPath = savedPath;
     }
 
-    public ArrayList<Task> loadTaskFromFile() {
+    /**
+     * Returns a ArrayList of Tasks stored in the file
+     * @return ArrayList of tasks
+     */
+    public ArrayList<Task> loadTaskFromFile(){
         try {
             File file = new File(savedPath);
             if (!file.exists()) {
@@ -47,6 +50,13 @@ public class TaskFile {
         return null;
     }
 
+    /**
+     * Returns a task based on the string
+     *
+     * @param task
+     * @return task
+     * @throws Exception
+     */
     public Task readTask(String task) throws Exception {
         String regex = "\\[(T|D|E)\\]\\[( |X)\\]\\s*(.*?)\\s*(\\(.*?\\))?";
         Pattern pattern = Pattern.compile(regex);
@@ -99,7 +109,13 @@ public class TaskFile {
         return null;
     }
 
-    public void saveTasks(TaskList taskList) {
+    /**
+     * Writes into a txt file all the tasks in ArrayList
+     *
+     * @param taskList
+     */
+
+    public void saveTasks( TaskList taskList){
         try {
             File file = new File(savedPath);
             FileWriter writer = new FileWriter(file);

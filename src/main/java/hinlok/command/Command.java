@@ -9,7 +9,7 @@ public abstract class Command {
 
     public abstract void execute(TaskList taskList, Ui ui, TaskFile taskFile) throws HinlokException;
 
-    public boolean isExit() {
+    public boolean isExit(){
         return false;
     }
 }
