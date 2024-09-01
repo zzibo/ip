@@ -1,5 +1,6 @@
 package hinlok;  //same package as the class being tested
 
+import hinlok.command.FindCommand;
 import hinlok.exceptions.HinlokException;
 import hinlok.tasks.TaskList;
 import org.junit.jupiter.api.Test;
@@ -23,4 +24,22 @@ public class HinlokTest {
         System.out.println(tasks.getTaskByIndex(0).toString());
         assertEquals(tasks.getTaskByIndex(0).toString(), "[D][ ] homework (by: Oct 11 2022)");
     }
+
+    @Test
+    public void testEventCreation() throws HinlokException {
+        TaskList tasks = new TaskList(new ArrayList<>());
+        tasks.addEvent("homework /from 5pm /to 6pm");
+        System.out.println(tasks.getTaskByIndex(0).toString());
+        assertEquals(tasks.getTaskByIndex(0).toString(), "[E][ ] homework (from: 5pm to: 6pm)");
+    }
+
+    @Test
+    public void testListAndMark() throws HinlokException {
+        TaskList tasks = new TaskList(new ArrayList<>());
+        tasks.addEvent("homework /from 5pm /to 6pm");
+        tasks.markTask(0);
+        System.out.println(tasks.getTaskByIndex(0).toString());
+        assertEquals(tasks.getTaskByIndex(0).toString(), "[E][X] homework (from: 5pm to: 6pm)");
+    }
+
 }

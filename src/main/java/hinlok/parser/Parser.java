@@ -7,6 +7,8 @@ import hinlok.command.DeleteCommand;
 import hinlok.command.MarkCommand;
 import hinlok.command.UnmarkCommand;
 import hinlok.command.AddCommand;
+import hinlok.command.FindCommand;
+
 import hinlok.exceptions.HinlokException;
 
 public class Parser {
@@ -45,29 +47,22 @@ public class Parser {
             case "mark":
                 int taskIndexMark = Integer.parseInt(taskDetails) - 1;
                 return new MarkCommand(taskIndexMark);
-
             case "unmark":
                 int taskIndexUnmark = Integer.parseInt(taskDetails) - 1;
                 return new UnmarkCommand(taskIndexUnmark);
-
             case "todo":
                 return new AddCommand(taskDetails, CommandType.TODO);
-
             case "deadline":
                 return new AddCommand(taskDetails, CommandType.DEADLINE);
-
             case "event":
                 return new AddCommand(taskDetails, CommandType.EVENT);
-
             case "delete":
                 int taskIndexDelete = Integer.parseInt(taskDetails) - 1;
                 return new DeleteCommand(taskIndexDelete);
-
-                case "find":
-                    return new FindCommand(taskDetails, CommandType.FIND);
-
-                default:
-                    System.out.println("What the skibbidi are you talking about bro");
+            case "find":
+                return new FindCommand(taskDetails, CommandType.FIND);
+            default:
+                System.out.println("What the skibbidi are you talking about bro");
                     break;
         }
         return null;
