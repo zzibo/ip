@@ -17,8 +17,8 @@ public class Ui {
     }
 
     public void showWelcome() {
-        System.out.println("Wassup, I am Hinlok and I love chinese songs. How can I help you today.\n" +
-                "Type 'bye' to exit");
+        System.out.println("Wassup, I am Hinlok and I love chinese songs. How can I help you today.\n"
+                + "Type 'bye' to exit");
     }
 
     /**

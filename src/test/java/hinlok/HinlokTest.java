@@ -1,13 +1,15 @@
-package hinlok;  //same package as the class being tested
+package hinlok; //same package as the class being tested
 
-import hinlok.command.FindCommand;
-import hinlok.exceptions.HinlokException;
-import hinlok.tasks.TaskList;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import hinlok.exceptions.HinlokException;
+import hinlok.tasks.TaskList;
+
+
 
 public class HinlokTest {
     @Test

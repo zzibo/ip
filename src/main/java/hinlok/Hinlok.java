@@ -1,9 +1,9 @@
 package hinlok;
 
 import hinlok.command.Command;
+import hinlok.file.TaskFile;
 import hinlok.parser.Parser;
 import hinlok.tasks.TaskList;
-import hinlok.file.TaskFile;
 import hinlok.ui.Ui;
 
 public class Hinlok {
@@ -21,6 +21,14 @@ public class Hinlok {
         Hinlok hinlok = new Hinlok("./data/hinlok.txt");
         hinlok.chat();
     }
+
+    /**
+     * Generates a response for the user's chat message.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
+
 
     private void chat() {
         ui.showWelcome();
