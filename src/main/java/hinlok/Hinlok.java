@@ -11,6 +11,10 @@ public class Hinlok {
     private TaskList taskList;
     private TaskFile taskFile;
 
+    /**
+     * Constructor for Hinlok class
+     * @param savedFilePath
+     */
     public Hinlok(String savedFilePath) {
         ui = new Ui();
         taskFile = new TaskFile(savedFilePath);

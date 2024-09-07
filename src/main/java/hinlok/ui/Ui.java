@@ -1,8 +1,9 @@
 package hinlok.ui;
 
+import java.util.Scanner;
+
 import hinlok.tasks.TaskList;
 
-import java.util.Scanner;
 
 public class Ui {
     private Scanner scanner;
