@@ -1,4 +1,5 @@
 package hinlok;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -21,8 +22,8 @@ public class MainWindow extends AnchorPane {
 
     private Hinlok hinlok;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/dahinlok.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/dahinlok.png"));
 
     @FXML
     public void initialize() {
