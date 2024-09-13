@@ -3,6 +3,7 @@ package hinlok.parser;
 import hinlok.command.AddCommand;
 import hinlok.command.Command;
 import hinlok.command.DeleteCommand;
+import hinlok.command.DetectDuplicateCommand;
 import hinlok.command.ExitCommand;
 import hinlok.command.FindCommand;
 import hinlok.command.ListCommand;
@@ -21,7 +22,6 @@ public class Parser {
         TODO,
         DEADLINE,
         EVENT,
-        FIND
     }
 
     /**
@@ -40,7 +40,6 @@ public class Parser {
             return new ListCommand();
         } else if (fullCommand.equalsIgnoreCase("bye")) {
             return new ExitCommand();
-
         } else if (splitCommand.length <= 1) {
             throw new HinlokException("What the sigma, I don't recognise this command");
         }
@@ -64,7 +63,9 @@ public class Parser {
             int taskIndexDelete = Integer.parseInt(taskDetails) - 1;
             return new DeleteCommand(taskIndexDelete);
         case "find":
-            return new FindCommand(taskDetails, CommandType.FIND);
+            return new FindCommand(taskDetails);
+        case "duplicate":
+            return new DetectDuplicateCommand(taskDetails);
         default:
             throw new HinlokException("What the skibbidi are you talking about bro");
         }

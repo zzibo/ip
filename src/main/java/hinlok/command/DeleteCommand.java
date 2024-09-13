@@ -12,17 +12,18 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructor for DeleteCommand
-     * @param taskIndexDelete
+     * @param idx index of task to delte
      */
-    public DeleteCommand(int taskIndexDelete) {
+    public DeleteCommand(int idx) {
         this.idx = idx;
 
     }
 
     /**
      * Deletes a task from the task list based on the idx given
-     * @param taskList
-     * @param taskFile
+     *
+     * @param taskList task list with all tasks
+     * @param taskFile task file that store tasks into data
      * @return a String that confirms the task is deleted
      * @throws HinlokException
      */
