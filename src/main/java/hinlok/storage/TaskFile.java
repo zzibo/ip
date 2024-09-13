@@ -11,11 +11,13 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import hinlok.exceptions.HinlokException;
 import hinlok.tasks.Deadline;
 import hinlok.tasks.Event;
 import hinlok.tasks.Task;
 import hinlok.tasks.TaskList;
 import hinlok.tasks.Todo;
+
 
 /**
  * Represents a TaskFile that stores the task list when the user leaves
@@ -25,6 +27,7 @@ public class TaskFile {
 
     /**
      * Constructor for TaskFile that contains a specific path to the file
+     *
      * @param savedPath path to the file with all the saved data
      */
     public TaskFile(String savedPath) {
@@ -33,6 +36,7 @@ public class TaskFile {
 
     /**
      * Returns a ArrayList of Tasks stored in the file
+     *
      * @return ArrayList of tasks
      */
     public ArrayList<Task> loadTaskFromFile() {
@@ -73,52 +77,23 @@ public class TaskFile {
         String regex = "\\[(T|D|E)\\]\\[( |X)\\]\\s*(.*?)\\s*(\\(.*?\\))?";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(task);
-        if (matcher.matches()) {
-            String type = matcher.group(1);
-            String status = matcher.group(2);
-            String name = matcher.group(3);
-            String extra = matcher.group(4);
-            switch (type) {
-            case "T":
-                System.out.println(task + " added");
-                return new Todo(name, status.equals("X"));
-
-            case "D":
-                String regexD = "\\(by: (.*?)\\)";
-                Pattern patternD = Pattern.compile(regexD);
-                Matcher matcherD = patternD.matcher(extra);
-
-                if (matcherD.find()) {
-                    String by = matcherD.group(1);
-                    LocalDate deadline = LocalDate.parse(by, DateTimeFormatter.ofPattern("MMM dd yyyy"));
-                    System.out.println(task + " added");
-                    return new Deadline(name, deadline, status.equals("X"));
-                } else {
-                    System.out.println(task + " does not follow the format");
-                }
-                break;
-            case "E":
-                String regexE = "\\(from: (.*?) to: (.*?)\\)";
-                Pattern patternE = Pattern.compile(regexE);
-                Matcher matcherE = patternE.matcher(extra);
-
-                if (matcherE.find()) {
-                    String from = matcherE.group(1);
-                    String to = matcherE.group(2);
-                    System.out.println(task + " added");
-                    return new Event(name, from, to, status.equals("X"));
-                } else {
-                    System.out.println(task + " does not follow the format");
-                }
-                break;
-            default:
-                System.out.println(task + " does not follow format");
-                break;
-            }
-        } else {
+        if (!matcher.matches()) {
             throw new Exception("Your task description is in the wrong format");
         }
-        return null;
+        String type = matcher.group(1);
+        String status = matcher.group(2);
+        String name = matcher.group(3);
+        String extra = matcher.group(4);
+        switch (type) {
+        case "T":
+            return processTodo(name, status);
+        case "D":
+            return processDeadline(name, status, extra);
+        case "E":
+            return processEvent(name, status, extra);
+        default:
+            throw new HinlokException("Unknown type in the saved file bro");
+        }
     }
 
     /**
@@ -126,7 +101,7 @@ public class TaskFile {
      *
      * @param taskList tasklist that needs to be saved
      */
-    public void saveTasks( TaskList taskList) {
+    public void saveTasks(TaskList taskList) {
         try {
             File file = new File(savedPath);
             FileWriter writer = new FileWriter(file);
@@ -137,5 +112,33 @@ public class TaskFile {
         } catch (IOException e) {
             System.out.println("An error occurred while saving hinlok.tasks: " + e.getMessage());
         }
+    }
+
+    private Task processTodo(String name, String status) {
+        return new Todo(name, status.equals("X"));
+    }
+
+    private Task processDeadline(String name, String status, String extra) throws HinlokException {
+        String regexD = "\\(by: (.*?)\\)";
+        Pattern patternD = Pattern.compile(regexD);
+        Matcher matcherD = patternD.matcher(extra);
+        if (!matcherD.find()) {
+            throw new HinlokException("The format in the saved file is wrong bro");
+        }
+        String by = matcherD.group(1);
+        LocalDate deadline = LocalDate.parse(by, DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        return new Deadline(name, deadline, status.equals("X"));
+    }
+
+    private Task processEvent(String name, String status, String extra) throws HinlokException {
+        String regexE = "\\(from: (.*?) to: (.*?)\\)";
+        Pattern patternE = Pattern.compile(regexE);
+        Matcher matcherE = patternE.matcher(extra);
+        if (!matcherE.find()) {
+            throw new HinlokException("your event format in saved file is wrong bro");
+        }
+        String from = matcherE.group(1);
+        String to = matcherE.group(2);
+        return new Event(name, from, to, status.equals("X"));
     }
 }

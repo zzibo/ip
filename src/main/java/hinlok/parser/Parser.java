@@ -14,6 +14,9 @@ import hinlok.exceptions.HinlokException;
  * Represents a parser that return the correct Command based on input
  */
 public class Parser {
+    /**
+     * Represents the types of Commands
+     */
     public enum CommandType {
         TODO,
         DEADLINE,
@@ -39,7 +42,7 @@ public class Parser {
             return new ExitCommand();
 
         } else if (splitCommand.length <= 1) {
-            throw new HinlokException("What the sigma, I dont recognise this command");
+            throw new HinlokException("What the sigma, I don't recognise this command");
         }
         String command = splitCommand[0].toLowerCase();
         String taskDetails = splitCommand[1];
