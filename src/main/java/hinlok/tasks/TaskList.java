@@ -99,7 +99,7 @@ public class TaskList {
     public String showTasks() {
         StringBuilder listOfTasks = new StringBuilder();
         for (int i = 0; i < this.getSize(); i++) {
-            listOfTasks.append((i + 1)).append(". ").append(this.getTaskByIndex(i).toString()).append("\n");
+            listOfTasks.append((i + 1) + ". " + this.getTaskByIndex(i).toString() + "\n");
         }
         return listOfTasks.toString();
     }

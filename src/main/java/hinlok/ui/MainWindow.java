@@ -30,13 +30,18 @@ public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private final Image hinlokImage = new Image(this.getClass().getResourceAsStream("/images/DaHinlok.png"));
 
+    /**
+     * Initialize the bot and display the MainWindow and show welcome message
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         showWelcomeMessage();
     }
 
-    /** Injects the Duke instance */
+    /**
+     * Injects the Hinlok instance
+     * */
     public void setHinlok(Hinlok d) {
         hinlok = d;
     }
@@ -60,14 +65,23 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    /**
+     * Exits the chatbot and close the MainWindow
+     * @param input String input typed by the user
+     */
     public void exitChat(String input) {
         String exitMessage = hinlok.getResponse("bye");
-        dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage), DialogBox.getHinlokDialog(exitMessage, hinlokImage));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getHinlokDialog(exitMessage, hinlokImage));
         PauseTransition pause = new PauseTransition(Duration.seconds(2));
         pause.setOnFinished(event -> Platform.exit());
         pause.play();
     }
 
+    /**
+     * Displays the welcome message of the chatbot
+     */
     public void showWelcomeMessage() {
         String welcome = "Wassup I'm Hinlok, your bro who loves chinese songs and takes care of all your task!";
         dialogContainer.getChildren().add(DialogBox.getHinlokDialog(welcome, hinlokImage));
