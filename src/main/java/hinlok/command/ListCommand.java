@@ -1,15 +1,16 @@
 package hinlok.command;
 
-import hinlok.file.TaskFile;
+import hinlok.storage.TaskFile;
 import hinlok.tasks.TaskList;
-import hinlok.ui.Ui;
 
+/**
+ * Represents a Command that lists all the tasks
+ */
 public class ListCommand extends Command {
 
     @Override
-    public void execute(TaskList taskList, Ui ui, TaskFile taskFile) {
-        ui.showTasks(taskList);
-        isExit();
+    public String execute(TaskList taskList, TaskFile taskFile) {
+        return taskList.showTasks();
     }
 
 

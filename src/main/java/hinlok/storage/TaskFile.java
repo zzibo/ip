@@ -1,6 +1,4 @@
-package hinlok.file;
-
-import hinlok.tasks.*;
+package hinlok.storage;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -13,8 +11,22 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import hinlok.tasks.Deadline;
+import hinlok.tasks.Event;
+import hinlok.tasks.Task;
+import hinlok.tasks.TaskList;
+import hinlok.tasks.Todo;
+
+/**
+ * Represents a TaskFile that stores the task list when the user leaves
+ */
 public class TaskFile {
     private final String savedPath;
+
+    /**
+     * Constructor for TaskFile that contains a specific path to the file
+     * @param savedPath path to the file with all the saved data
+     */
     public TaskFile(String savedPath) {
         this.savedPath = savedPath;
     }
@@ -23,7 +35,7 @@ public class TaskFile {
      * Returns a ArrayList of Tasks stored in the file
      * @return ArrayList of tasks
      */
-    public ArrayList<Task> loadTaskFromFile(){
+    public ArrayList<Task> loadTaskFromFile() {
         try {
             File file = new File(savedPath);
             if (!file.exists()) {
@@ -53,7 +65,7 @@ public class TaskFile {
     /**
      * Returns a task based on the string
      *
-     * @param task
+     * @param task task description
      * @return task
      * @throws Exception
      */
@@ -112,10 +124,9 @@ public class TaskFile {
     /**
      * Writes into a txt file all the tasks in ArrayList
      *
-     * @param taskList
+     * @param taskList tasklist that needs to be saved
      */
-
-    public void saveTasks( TaskList taskList){
+    public void saveTasks( TaskList taskList) {
         try {
             File file = new File(savedPath);
             FileWriter writer = new FileWriter(file);

@@ -1,9 +1,17 @@
 package hinlok.tasks;
 
+/**
+ * Represents a Task with a name and status
+ */
 public class Task {
     protected boolean isDone;
     protected String name;
 
+    /**
+     * Constructor for a task with name and status
+     * @param name name of the task
+     * @param isDone status of the task
+     */
     public Task(String name, boolean isDone) {
         this.name = name;
         this.isDone = isDone;

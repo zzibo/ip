@@ -1,16 +1,14 @@
 package hinlok.command;
 
 import hinlok.exceptions.HinlokException;
-import hinlok.file.TaskFile;
+import hinlok.storage.TaskFile;
 import hinlok.tasks.TaskList;
-import hinlok.ui.Ui;
 
+/**
+ * Represents an abstract class Command
+ */
 public abstract class Command {
 
-    public abstract void execute(TaskList taskList, Ui ui, TaskFile taskFile) throws HinlokException;
-
-    public boolean isExit(){
-        return false;
-    }
+    public abstract String execute(TaskList taskList, TaskFile taskFile) throws HinlokException;
 }
 
