@@ -41,7 +41,7 @@ public class Parser {
         } else if (fullCommand.equalsIgnoreCase("bye")) {
             return new ExitCommand();
         } else if (splitCommand.length <= 1) {
-            throw new HinlokException("What the sigma, I don't recognise this command");
+            throw new HinlokException("What the sigma, you didn't give me the task details");
         }
         String command = splitCommand[0].toLowerCase();
         String taskDetails = splitCommand[1];

@@ -3,7 +3,6 @@ package hinlok.command;
 import java.util.ArrayList;
 
 import hinlok.exceptions.HinlokException;
-import hinlok.parser.Parser.CommandType;
 import hinlok.storage.TaskFile;
 import hinlok.tasks.Task;
 import hinlok.tasks.TaskList;

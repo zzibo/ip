@@ -45,7 +45,7 @@ public class TaskList {
             throw new HinlokException("You did not give me a todo task bro");
         }
         taskList.add(new Todo(taskDetails, false));
-        return "Roger bro, I added a todo: " + getNumberInList() + "\n" + getNumberInList();
+        return "Roger bro, I added a todo: " + taskDetails + "\n" + getNumberInList();
     }
 
     /**
