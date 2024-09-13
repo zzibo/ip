@@ -1,19 +1,16 @@
 package hinlok.command;
 
-import hinlok.file.TaskFile;
+import hinlok.storage.TaskFile;
 import hinlok.tasks.TaskList;
-import hinlok.ui.Ui;
 
+/**
+ * Represents an ExitCommand that exits the chat bot
+ */
 public class ExitCommand extends Command {
 
     @Override
-    public void execute(TaskList taskList, Ui ui, TaskFile taskFile) {
+    public String execute(TaskList taskList, TaskFile taskFile) {
         taskFile.saveTasks(taskList);
-        System.out.println("see ya");
-        isExit();
-    }
-
-    public boolean isExit() {
-        return true;
+        return "Bye bro I zao first";
     }
 }

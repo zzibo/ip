@@ -1,14 +1,17 @@
 package hinlok.tasks;
 
-import hinlok.exceptions.HinlokException;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import hinlok.exceptions.HinlokException;
+
+/**
+ * Represents a task list that contains todo, deadline and event tasks
+ */
 public class TaskList {
-    private ArrayList<Task> taskList;
+    private final ArrayList<Task> taskList;
 
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
@@ -34,23 +37,24 @@ public class TaskList {
     /**
      * Adds a new Todo object into the task list.
      *
-     * @param taskDetails
-     * @throws HinlokException
+     * @param taskDetails details of the task
+     * @throws HinlokException exception when wrong inputs are given
      */
-    public void addTodo(String taskDetails) throws HinlokException {
+    public String addTodo(String taskDetails) throws HinlokException {
         if (taskDetails.trim().isEmpty()) {
             throw new HinlokException("You did not give me a todo task bro");
         }
         taskList.add(new Todo(taskDetails, false));
-        System.out.println(getNumberInList());
+        return "Roger bro, I added a todo: " + getNumberInList() + "\n" + getNumberInList();
     }
 
     /**
      * Adds a new deadline object into task list.
-     * @param taskDetails
-     * @throws HinlokException
+     *
+     * @param taskDetails details of the task
+     * @throws HinlokException exception when wrong inputs are given
      */
-    public void addDeadline(String taskDetails) throws HinlokException {
+    public String addDeadline(String taskDetails) throws HinlokException {
         String regex = "^(.*?) /by (\\d{4})-(\\d{2})-(\\d{2})$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(taskDetails);
@@ -61,8 +65,7 @@ public class TaskList {
             String deadlineName = deadlineDetails[0];
             LocalDate date = LocalDate.parse(deadlineDetails[1]);
             taskList.add(new Deadline(deadlineName, date, false));
-            System.out.println("Added a Deadline: " + deadlineName);
-            System.out.println(getNumberInList());
+            return "Roger bro, I added a Deadline: " + deadlineName + "\n" + getNumberInList();
         }
 
     }
@@ -70,10 +73,10 @@ public class TaskList {
     /**
      * Adds an Event object to task list.
      *
-     * @param taskDetails
-     * @throws HinlokException
+     * @param taskDetails details of the task
+     * @throws HinlokException exception when wrong inputs are given
      */
-    public void addEvent(String taskDetails) throws HinlokException {
+    public String addEvent(String taskDetails) throws HinlokException {
         String regex = "^(.*?)/from (.*?) /to (.*?)$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(taskDetails);
@@ -85,45 +88,53 @@ public class TaskList {
             String from = eventDetails[1];
             String to = eventDetails[2];
             taskList.add(new Event(eventName, from, to, false));
-            System.out.println("Added a Event: " + eventName);
-            System.out.println(getNumberInList());
+            return "Roger bro, I added a Event: " + eventName + "\n" + getNumberInList();
         }
     }
 
+    /**
+     * Shows all the task stored in the task list currently
+     * @return All stored tasks
+     */
+    public String showTasks() {
+        StringBuilder listOfTasks = new StringBuilder();
+        for (int i = 0; i < this.getSize(); i++) {
+            listOfTasks.append((i + 1)).append(". ").append(this.getTaskByIndex(i).toString()).append("\n");
+        }
+        return listOfTasks.toString();
+    }
 
-    public void markTask(int i) {
+
+    /**
+     * Change the isDone of the task to true
+     * @param i index of task to unmark
+     * @return a String that confirms the task is marked
+     */
+    public String markTask(int i) {
         Task markedTask = taskList.get(i);
         markedTask.markAsDone();
-        System.out.println("Roger sir, I marked this todo as done:");
-        System.out.println(markedTask);
+        return "Roger bro, I marked this task as done:\n " + markedTask.getName();
     }
 
-    public void unmarkTask(int i) {
+    /**
+     * Change the isDone of the task to false
+     * @param i index of task to mark
+     * @return a String that confirms a String is unmarked
+     */
+    public String unmarkTask(int i) {
         Task markedTask = taskList.get(i);
         markedTask.markAsUndone();
-        System.out.println("Roger sir, I marked this task as undone:");
-        System.out.println(markedTask);
+        return "Roger bro, I marked this task as undone:\n " + markedTask.getName();
     }
 
-    public void deleteTask(int i) {
+    /**
+     * Remove a task from the task list
+     * @param i index of task to remove
+     * @return a String that confirms the task is deleted
+     */
+    public String deleteTask(int i) {
         String temp = taskList.get(i).toString();
         taskList.remove(i);
-        System.out.println("Roger sir, I removed " + temp);
-        System.out.println(getNumberInList());
-    }
-
-    public void findDeadlineByDate(String date) {
-        System.out.println("These are the deadline due on that day:\n");
-        for (Task task : taskList) {
-            if (task instanceof Deadline) {
-                System.out.println(((Deadline) task).getBy());
-                if (date.equals(((Deadline) task).getBy())) {
-                    System.out.println(task);
-
-                }
-            }
-
-        }
-
+        return "Roger bro, I removed " + temp;
     }
 }

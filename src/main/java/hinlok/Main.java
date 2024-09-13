@@ -1,7 +1,9 @@
 package hinlok;
 
+import java.awt.*;
 import java.io.IOException;
 
+import hinlok.ui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -22,7 +24,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setHinlok(hinlok); // inject the Duke instance
+            fxmlLoader.<MainWindow>getController().setHinlok(hinlok); // inject the Hinlok instance
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
