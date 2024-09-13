@@ -15,18 +15,17 @@ import hinlok.tasks.TaskList;
 public class FindCommand extends Command {
 
     private final String taskDetails;
-    private final CommandType type;
 
 
     /**
-     * Constructor for FindCommand
-     * @param taskDetails
-     * @param type
+     * Constructor for FindCommand with task details and type type
+     *
+     * @param taskDetails details of task
      */
-    public FindCommand(String taskDetails, CommandType type) {
+    public FindCommand(String taskDetails) {
         this.taskDetails = taskDetails;
-        this.type = type;
     }
+
     @Override
     public String execute(TaskList taskList, TaskFile taskFile) throws HinlokException {
         ArrayList<Task> matchingTasks = new ArrayList<>();
@@ -37,12 +36,11 @@ public class FindCommand extends Command {
         }
         if (matchingTasks.isEmpty()) {
             return "Sorry bro, no matching tasks found";
-        } else {
-            String res = "Got it bro,here are the matching tasks in your list:\n";
-            for (int i = 0; i < matchingTasks.size(); i++) {
-                res += ((i + 1) + "." + matchingTasks.get(i).toString());
-            }
-            return res;
         }
+        String res = "Got it bro,here are the matching tasks in your list:\n";
+        for (int i = 0; i < matchingTasks.size(); i++) {
+            res += ((i + 1) + "." + matchingTasks.get(i).toString());
+        }
+        return res;
     }
 }
