@@ -57,10 +57,14 @@ public class MainWindow extends AnchorPane {
             exitChat("bye");
         } else {
             String response = hinlok.getResponse(input);
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getHinlokDialog(response, hinlokImage)
+            dialogContainer.getChildren().add(
+                    DialogBox.getUserDialog(input, userImage)
             );
+            PauseTransition pause = new PauseTransition(Duration.seconds(0.3));
+            pause.setOnFinished(event -> dialogContainer.getChildren().add(
+                    DialogBox.getHinlokDialog(response, hinlokImage)
+            ));
+            pause.play();
         }
         userInput.clear();
     }

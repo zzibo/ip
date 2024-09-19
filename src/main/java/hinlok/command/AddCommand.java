@@ -14,8 +14,9 @@ public class AddCommand extends Command {
 
     /**
      * Constructor for AddCommand
-     * @param taskDetails
-     * @param type
+     *
+     * @param taskDetails details of task
+     * @param type type of class
      */
     public AddCommand(String taskDetails, CommandType type) {
         this.taskDetails = taskDetails;

@@ -44,7 +44,13 @@ public class TaskList {
         if (taskDetails.trim().isEmpty()) {
             throw new HinlokException("You did not give me a todo task bro");
         }
-        taskList.add(new Todo(taskDetails, false));
+        Task addedTask = new Todo(taskDetails, false);
+        taskList.add(addedTask);
+        if (checkDuplicates(addedTask)) {
+            return "Roger bro, I added a todo: " + taskDetails + "\n" + getNumberInList()
+                + "\n[Warning] This task is duplicated, "
+                    + "use duplicate [name of task] to check all the task with the same name and delete if necessary";
+        }
         return "Roger bro, I added a todo: " + taskDetails + "\n" + getNumberInList();
     }
 
@@ -60,14 +66,19 @@ public class TaskList {
         Matcher matcher = pattern.matcher(taskDetails);
         if (!matcher.matches()) {
             throw new HinlokException("your Deadline format is wrong bro");
-        } else {
-            String[] deadlineDetails = taskDetails.split(" /by ", 2);
-            String deadlineName = deadlineDetails[0];
-            LocalDate date = LocalDate.parse(deadlineDetails[1]);
-            taskList.add(new Deadline(deadlineName, date, false));
-            return "Roger bro, I added a Deadline: " + deadlineName + "\n" + getNumberInList();
         }
-
+        String[] deadlineDetails = taskDetails.split(" /by ", 2);
+        String deadlineName = deadlineDetails[0];
+        LocalDate date = LocalDate.parse(deadlineDetails[1]);
+        Task addedTask = new Deadline(deadlineName, date, false);
+        taskList.add(addedTask);
+        if (checkDuplicates(addedTask)) {
+            return "Roger bro, I added a deadline: " + taskDetails + "\n" + getNumberInList()
+                    + "\n[Warning] This task is duplicated, "
+                    + "use duplicate [name of task] to check all the task with the same name and delete if necessary";
+        }
+        taskList.add(addedTask);
+        return "Roger bro, I added a Deadline: " + deadlineName + "\n" + getNumberInList();
     }
 
     /**
@@ -82,19 +93,25 @@ public class TaskList {
         Matcher matcher = pattern.matcher(taskDetails);
         if (!matcher.matches()) {
             throw new HinlokException("your Event format is wrong bro");
-        } else {
-            String[] eventDetails = taskDetails.split(" /from | /to ", 3);
-            String eventName = eventDetails[0];
-            String from = eventDetails[1];
-            String to = eventDetails[2];
-            taskList.add(new Event(eventName, from, to, false));
-            return "Roger bro, I added a Event: " + eventName + "\n" + getNumberInList();
         }
+        String[] eventDetails = taskDetails.split(" /from | /to ", 3);
+        String eventName = eventDetails[0];
+        String from = eventDetails[1];
+        String to = eventDetails[2];
+        Task addedTask = new Event(eventName, from, to, false);
+        taskList.add(addedTask);
+        if (checkDuplicates(addedTask)) {
+            return "Roger bro, I added a event: " + taskDetails + "\n" + getNumberInList()
+                    + "\n[Warning] This task is duplicated, "
+                    + "use duplicate [name of task] to check all the task with the same name and delete if necessary";
+        }
+        return "Roger bro, I added a Event: " + eventName + "\n" + getNumberInList();
     }
 
     /**
-     * Shows all the task stored in the task list currently
-     * @return All stored tasks
+     * Return String of all the task stored in the task list currently
+     *
+     * @return String of task list
      */
     public String showTasks() {
         StringBuilder listOfTasks = new StringBuilder();
@@ -107,6 +124,7 @@ public class TaskList {
 
     /**
      * Change the isDone of the task to true
+     *
      * @param i index of task to unmark
      * @return a String that confirms the task is marked
      */
@@ -118,6 +136,7 @@ public class TaskList {
 
     /**
      * Change the isDone of the task to false
+     *
      * @param i index of task to mark
      * @return a String that confirms a String is unmarked
      */
@@ -129,6 +148,7 @@ public class TaskList {
 
     /**
      * Remove a task from the task list
+     *
      * @param i index of task to remove
      * @return a String that confirms the task is deleted
      */
@@ -136,5 +156,15 @@ public class TaskList {
         String temp = taskList.get(i).toString();
         taskList.remove(i);
         return "Roger bro, I removed " + temp;
+    }
+
+    private boolean checkDuplicates(Task addedTask) {
+        for (Task task : this.taskList) {
+            if (task.getName().equals(addedTask.getName())
+                    && task.getClass() == addedTask.getClass()) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -12,6 +12,7 @@ public class DetectDuplicateCommand extends Command {
 
     /**
      * Constructor for DetectDuplicateCommand
+     *
      * @param taskDetails details of task
      */
     public DetectDuplicateCommand(String taskDetails) {
@@ -19,20 +20,26 @@ public class DetectDuplicateCommand extends Command {
     }
 
     /**
-     * Returns duplicated command
-     * @param taskList
-     * @param taskFile
-     * @return
+     * Returns duplicated tasks that are detected
+     *
+     * @param taskList task list with all tasks
+     * @param taskFile task file that store tasks into data
+     * @return duplicated tasks
      */
     public String execute(TaskList taskList, TaskFile taskFile) {
+        int num = 0;
         String duplicates = "These tasks are duplicated according to their name "
                 + "delete them by typing 'delete [task index]':\n";
         int idx = 1;
         for (Task task : taskList.getAllTasks()) {
             if (task.getName().equals(this.taskDetails)) {
                 duplicates += idx + ". " + task.toString() + "\n";
+                num++;
             }
             idx++;
+        }
+        if (num == 0) {
+            duplicates = "There are no duplicated tasks with this name " + this.taskDetails;
         }
         return duplicates;
     }

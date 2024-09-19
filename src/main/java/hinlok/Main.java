@@ -1,6 +1,5 @@
 package hinlok;
 
-import java.awt.*;
 import java.io.IOException;
 
 import hinlok.ui.MainWindow;

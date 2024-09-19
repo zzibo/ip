@@ -19,8 +19,9 @@ public class MarkCommand extends Command {
 
     /**
      * Marks a task as done based on the index
-     * @param taskList
-     * @param taskFile
+     *
+     * @param taskList task list with all tasks
+     * @param taskFile task file that store tasks into data
      * @return message from hinlok that the task is marked
      */
     @Override

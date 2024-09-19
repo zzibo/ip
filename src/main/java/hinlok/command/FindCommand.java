@@ -25,6 +25,13 @@ public class FindCommand extends Command {
         this.taskDetails = taskDetails;
     }
 
+    /**
+     * Returns tasks that are found by the command
+     *
+     * @param taskList task list with all tasks
+     * @param taskFile task file that store tasks into data
+     * @return tasks found
+     * */
     @Override
     public String execute(TaskList taskList, TaskFile taskFile) throws HinlokException {
         ArrayList<Task> matchingTasks = new ArrayList<>();

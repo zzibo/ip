@@ -18,8 +18,9 @@ public class UnmarkCommand extends Command {
     }
     /**
      * Marks a task as undone based on the index
-     * @param taskList
-     * @param taskFile
+     *
+     * @param taskList task list with all tasks
+     * @param taskFile task file that store tasks into data
      * @return message from hinlok that the task is unmarked
      */
     @Override
