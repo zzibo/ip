@@ -38,7 +38,7 @@ public class DetectDuplicateCommand extends Command {
             }
             idx++;
         }
-        if (num == 0) {
+        if (num <= 1) {
             duplicates = "There are no duplicated tasks with this name " + this.taskDetails;
         }
         return duplicates;
