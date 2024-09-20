@@ -31,11 +31,9 @@ public class MainWindow extends AnchorPane {
     private Hinlok hinlok;
 
     private final Image userImage = new Image(Objects.requireNonNull(
-            this.getClass().getResourceAsStream("/images/DaUser.jpg")));
+            this.getClass().getResourceAsStream("/images/DaUser.png")));
     private final Image hinlokImage = new Image(Objects.requireNonNull(
             this.getClass().getResourceAsStream("/images/DaHinlok.png")));
-    private final Image backgroundImage = new Image(Objects.requireNonNull(
-            this.getClass().getResourceAsStream("/images/background.png")));
 
     /**
      * Initialize the bot and display the MainWindow and show welcome message

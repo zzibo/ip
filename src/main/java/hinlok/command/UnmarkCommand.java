@@ -11,7 +11,7 @@ public class UnmarkCommand extends Command {
 
     /**
      * Constructor for UnmarkCommand
-     * @param idx
+     * @param idx index of task to be unmarked
      */
     public UnmarkCommand(int idx) {
         this.idx = idx;
