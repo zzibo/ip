@@ -21,9 +21,14 @@ public class Hinlok {
     public Hinlok(String savedFilePath) {
         taskFile = new TaskFile(savedFilePath);
         taskList = new TaskList(taskFile.loadTaskFromFile());
-        assert taskList != null;
-        assert taskFile != null;
     }
+
+    /**
+     * Returns a String of the response of the bot
+     *
+     * @param input input text of the user
+     * @return a String of the response
+     */
 
     public String getResponse(String input) {
         try {

@@ -13,10 +13,20 @@ import hinlok.exceptions.HinlokException;
 public class TaskList {
     private final ArrayList<Task> taskList;
 
+    /**
+     * Constructs a TaskList
+     *
+     * @param taskList task list with all tasks
+     */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
+    /**
+     * Returns an array list with all the task
+     *
+     * @return taskList
+     */
     public ArrayList<Task> getAllTasks() {
         return this.taskList;
     }
@@ -45,12 +55,13 @@ public class TaskList {
             throw new HinlokException("You did not give me a todo task bro");
         }
         Task addedTask = new Todo(taskDetails, false);
-        taskList.add(addedTask);
         if (checkDuplicates(addedTask)) {
+            taskList.add(addedTask);
             return "Roger bro, I added a todo: " + taskDetails + "\n" + getNumberInList()
                 + "\n[Warning] This task is duplicated, "
                     + "use duplicate [name of task] to check all the task with the same name and delete if necessary";
         }
+        taskList.add(addedTask);
         return "Roger bro, I added a todo: " + taskDetails + "\n" + getNumberInList();
     }
 
@@ -71,8 +82,8 @@ public class TaskList {
         String deadlineName = deadlineDetails[0];
         LocalDate date = LocalDate.parse(deadlineDetails[1]);
         Task addedTask = new Deadline(deadlineName, date, false);
-        taskList.add(addedTask);
         if (checkDuplicates(addedTask)) {
+            taskList.add(addedTask);
             return "Roger bro, I added a deadline: " + taskDetails + "\n" + getNumberInList()
                     + "\n[Warning] This task is duplicated, "
                     + "use duplicate [name of task] to check all the task with the same name and delete if necessary";
@@ -99,12 +110,13 @@ public class TaskList {
         String from = eventDetails[1];
         String to = eventDetails[2];
         Task addedTask = new Event(eventName, from, to, false);
-        taskList.add(addedTask);
         if (checkDuplicates(addedTask)) {
+            taskList.add(addedTask);
             return "Roger bro, I added a event: " + taskDetails + "\n" + getNumberInList()
                     + "\n[Warning] This task is duplicated, "
                     + "use duplicate [name of task] to check all the task with the same name and delete if necessary";
         }
+        taskList.add(addedTask);
         return "Roger bro, I added a Event: " + eventName + "\n" + getNumberInList();
     }
 
@@ -116,7 +128,7 @@ public class TaskList {
     public String showTasks() {
         StringBuilder listOfTasks = new StringBuilder();
         for (int i = 0; i < this.getSize(); i++) {
-            listOfTasks.append((i + 1) + ". " + this.getTaskByIndex(i).toString() + "\n");
+            listOfTasks.append((i + 1)).append(". ").append(this.getTaskByIndex(i).toString()).append("\n");
         }
         return listOfTasks.toString();
     }
@@ -161,7 +173,7 @@ public class TaskList {
     private boolean checkDuplicates(Task addedTask) {
         for (Task task : this.taskList) {
             if (task.getName().equals(addedTask.getName())
-                    && task.getClass() == addedTask.getClass()) {
+                    && task.getClass().equals(addedTask.getClass())) {
                 return true;
             }
         }
