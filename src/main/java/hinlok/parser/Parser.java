@@ -31,7 +31,7 @@ public class Parser {
      *
      * @param fullCommand Command given to Hinlok
      * @return Command
-     * @throws HinlokException
+     * @throws HinlokException exception when the input does not match any commands
      */
     public static Command parse(String fullCommand) throws HinlokException {
         String[] splitCommand = fullCommand.trim().split(" ", 2);

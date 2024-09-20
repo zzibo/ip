@@ -71,7 +71,7 @@ public class TaskFile {
      *
      * @param task task description
      * @return task
-     * @throws Exception
+     * @throws Exception exception when reading task of unknown type
      */
     public Task readTask(String task) throws Exception {
         String regex = "\\[(T|D|E)\\]\\[( |X)\\]\\s*(.*?)\\s*(\\(.*?\\))?";
@@ -99,7 +99,7 @@ public class TaskFile {
     /**
      * Writes into a txt file all the tasks in ArrayList
      *
-     * @param taskList tasklist that needs to be saved
+     * @param taskList taskList that needs to be saved
      */
     public void saveTasks(TaskList taskList) {
         try {

@@ -28,17 +28,17 @@ public class DetectDuplicateCommand extends Command {
      */
     public String execute(TaskList taskList, TaskFile taskFile) {
         int num = 0;
-        String duplicates = "These tasks are duplicated according to their name "
-                + "delete them by typing 'delete [task index]':\n";
+        String duplicates = "These tasks are duplicated according to their name,"
+                + " delete them by typing 'delete [task index]':\n";
         int idx = 1;
         for (Task task : taskList.getAllTasks()) {
             if (task.getName().equals(this.taskDetails)) {
-                duplicates += idx + ". " + task.toString() + "\n";
+                duplicates += idx + ". " + task + "\n";
                 num++;
             }
             idx++;
         }
-        if (num == 0) {
+        if (num <= 1) {
             duplicates = "There are no duplicated tasks with this name " + this.taskDetails;
         }
         return duplicates;

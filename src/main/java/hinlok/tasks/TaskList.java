@@ -41,7 +41,7 @@ public class TaskList {
     }
 
     public String getNumberInList() {
-        return "The task list has " + taskList.size() + " task currently";
+        return "The task list has " + taskList.size() + " task(s) currently";
     }
 
     /**
@@ -170,6 +170,12 @@ public class TaskList {
         return "Roger bro, I removed " + temp;
     }
 
+    /**
+     * Returns a boolean to that is true when duplicates are found
+     *
+     * @param addedTask task that user want to add
+     * @return boolean
+     */
     private boolean checkDuplicates(Task addedTask) {
         for (Task task : this.taskList) {
             if (task.getName().equals(addedTask.getName())
