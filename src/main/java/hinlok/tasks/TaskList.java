@@ -41,7 +41,7 @@ public class TaskList {
     }
 
     public String getNumberInList() {
-        return "The task list has " + taskList.size() + " task currently";
+        return "The task list has " + taskList.size() + " task(s) currently";
     }
 
     /**
